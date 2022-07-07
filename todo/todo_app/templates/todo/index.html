@@ -1,0 +1,58 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+Todo
+{% endblock %}
+
+{% block content %}
+
+{% include 'todo/input_form.html' %}
+
+{% for todo in todos %}
+
+<p id="demo"></p>
+<div class="">
+    <div class="px-32 flex items-center justify-between">
+        <div>
+            <input type="checkbox" name="check-todo" id="todo-{{todo.id}}" value="{{todo.text}}">
+            <label for="todo-{{todo.id}}">{{ todo }}</label>
+        </div>
+    
+        <div>
+            <a href={% url "note" todo.id %}>{% include 'todo/note.html' %}</a>
+            <a href={% url "delete" todo.id %}>{% include 'todo/remove.html' %}</a>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<script>
+    let task_done = document.querySelectorAll("input[type=checkbox]");
+
+    // async function getTodo(){
+    //     await fetch("/todo/", {
+    //         method: "post",
+
+    //         headers: {
+    //             "accept": "application/json",
+    //             "Content-Type": "application/json"
+    //         },
+
+    //         body: {
+    //             done: document.querySelector("#todo-{{todo.id}}").checked,
+    //             crsfmiddlewaretoken: document.querySelector("input[name=crsfmiddlewaretoken]").innerText
+    //         }
+    //     })
+        
+    //     .then(response => {
+    //         // task_done.forEach(item => {
+                
+    //         // })
+    //         console.log("Hello world")
+    //     })
+    // }
+
+    // getTodo()
+</script>
+{% endblock %}
