@@ -5,7 +5,7 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Task Manager</a>
+              <a href="{% url 'index' %}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Task Manager</a>
 
             </div>
           </div>
@@ -13,11 +13,12 @@
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
             <div class="ml-3 relative">
+              {% if request.user.is_authenticated %}
               <div>
-                <button type="button" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                  <span class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">{{ request.user.username.capitalize }}</span>
-                </button>
+                <div class="text-base font-medium leading-none text-white">{{ request.user.username.capitalize }}</div>
+                <div class="text-base font-medium leading-none text-white"><a href="{% url 'logout' %}">Logout</a></div>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -31,17 +32,17 @@
     <div class="md:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Task Manager</a>
+        <a href="{% url 'index' %}" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Task Manager</a>
 
       </div>
       <div class="pt-4 pb-3 border-t border-gray-700">
         <div class="ml-3 flex items-center justify-between">
         {% if user.is_authenticated %}
         <div class="text-base font-medium leading-none text-white">{{ request.user.username.capitalize }}</div>
-        <div class="text-base font-medium leading-none text-white">Logout</div>
+        <div class="text-base font-medium leading-none text-white"><a href="{% url 'logout' %}">Logout</a></div>
         {% else %}
         <a href="{% url 'login' %}">
-            <div class="text-base font-medium leading-none text-white">Login</div>
+            <div class="text-base font-medium leading-none text-white"><a href="{% url 'login' %}">Login</a></div>
         </a>
         {% endif %}
         </div>
