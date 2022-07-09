@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 class Sender(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        self.user.username
+    def get_sender(self):
+        return self.user
 
 class Receiver(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __self__(self):
-        self.user.username
+    def get_receiver(self):
+        return self.user
 
 class Message(models.Model):
     sent = models.ForeignKey(Sender, on_delete=models.CASCADE)
@@ -21,5 +21,8 @@ class Message(models.Model):
     
     def __str__(self):
         return self.text
+
+    def get_routes(self):
+        return f"Sent from {str(self.sent.user).upper()} to {str(self.receive.user).upper()}"
 
     
