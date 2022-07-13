@@ -1,1 +1,5 @@
 env
+todo/todo_app/migrations
+todo/db.sqlite3
+todo/demo
+

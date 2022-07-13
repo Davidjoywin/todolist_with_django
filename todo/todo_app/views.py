@@ -95,7 +95,6 @@ def delete_note(request, pk, fk):
     note = task.note_set.get(id=fk)
 
     note.delete()
-    messages.success(request, "Note Deleted")
     return redirect(reverse("note", args=(pk,)))
 
 def delete_task(request, pk):
